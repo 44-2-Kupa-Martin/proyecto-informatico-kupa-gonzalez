@@ -1,6 +1,11 @@
 import React from 'react';
 
 function MessageData(props) {
+    if (props.username === null) {
+        props.src= 'anonymousSrc';
+        props.username= 'Anonymous';
+    }
+    
     if (props.posting) {
         return (
             <div>

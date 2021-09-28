@@ -1,0 +1,21 @@
+[
+    {
+        "id": "54515",
+        "text": "lorem ipsum",
+        "userData": {
+            "src": "http://lol",
+            "username": "Ahre",
+            "date": "olol"
+        }
+    },
+    {
+        "id": "54515",
+        "text": "lorem ipsum",
+        "userData": {
+            "src": "http://lol",
+            "username": null,
+            "date": "olol"
+        }
+    },
+    {}
+]

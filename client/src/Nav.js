@@ -1,10 +1,14 @@
-import React from 'react';
-import ProfilePic from './ProfilePic';
-import LoginButton from './LoginButton';
+import React, { useContext } from 'react';
+import LoginPage from './LoginPage';
+import SearchBar from './SearchBar';
+import { Context } from './App';
 
 
-function Nav() {
-    var loginState= false;
+function Nav(props) {
+    const context= useContext(Context);
+    function login() {
+        context.setPage([<LoginPage />]);
+    }
     return (
         <nav>
             <ul>
@@ -12,14 +16,11 @@ function Nav() {
                     <h2>Logo</h2>
                 </li>
                 <li>
-                    <form action className="searchbar">
-                        <button onClick="searchHandler()"><i className="fa fa-search" /></button>
-                        <input type="text" placeholder="Search" />
-                    </form>
+                    <SearchBar />
                 </li>
                 <li className="login">
-                    <ProfilePic loggedIn={loginState}/>
-                    <LoginButton />
+                    <img src="#" />
+                    <button onClick={() => login()}>Log In</button>
                 </li>
             </ul>
         </nav>
