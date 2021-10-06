@@ -5,6 +5,7 @@ function PostMsg(props) {
     function messageHandler() {
         let obj;
         obj.text= value;
+        obj.userData= context.userData;
         axios.post('', obj);
         setValue('');
     }

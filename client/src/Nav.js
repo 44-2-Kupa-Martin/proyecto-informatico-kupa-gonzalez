@@ -6,8 +6,12 @@ import { Context } from './App';
 
 function Nav(props) {
     const context= useContext(Context);
+    //UI update
     function login() {
         context.setPage([<LoginPage />]);
+    }
+    function logout() {
+        //put to '/logout' and update context.user
     }
     return (
         <nav>
@@ -19,8 +23,9 @@ function Nav(props) {
                     <SearchBar />
                 </li>
                 <li className="login">
-                    <img src="#" />
-                    <button onClick={() => login()}>Log In</button>
+                    {context.login ? 
+                    [<img src="#" />, <button onClick={() => logout()}>Log Out</button>] : 
+                    <button onClick={() => login()}>Log In</button>}
                 </li>
             </ul>
         </nav>
