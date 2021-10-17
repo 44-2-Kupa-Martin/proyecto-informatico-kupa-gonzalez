@@ -1,21 +1,158 @@
+"backend/users" "get/post"
+"backend/messages" "get/post/put/delete"
+
+req GET to /users
+
+{
+    "username": "lorem ipsum",
+    "password": "lorem ipsum"
+}
+
+res
+
+{
+    "success": true,
+    "err": null
+}
+
+{
+    "success": false,
+    "err": 5
+}
+
+
+req POST to /users
+
+{
+    "username": "lorem ipsum",
+    "password": "lorem ipsum"
+}
+
+res
+
+{
+    "success": true,
+    "err": null
+}
+
+{
+    "success": false,
+    "err": 5
+}
+
+req GET to /messages
+{
+
+}
+
+{
+    "_id": "5e4ah571ss5"
+}
+
+{
+    "username": "fullaccess"
+}
+
+res
+
 [
     {
-        "id": "54515",
+        "_id": "5e4ah571ss5",
         "text": "lorem ipsum",
         "userData": {
             "src": "http://lol",
-            "username": "Ahre",
-            "date": "olol"
+            "username": "fullaccess",
+            "date": "mm/dd/yyyy"
         }
     },
     {
-        "id": "54515",
+        "_id": "5f4j5f6ggjs13ag55",
         "text": "lorem ipsum",
         "userData": {
-            "src": "http://lol",
             "username": null,
-            "date": "olol"
+            "date": "mm/dd/yyyy"
         }
     },
     {}
 ]
+
+{
+    "_id": "5e4ah571ss5",
+    "text": "lorem ipsum",
+    "userData": {
+        "src": "http://lol",
+        "username": "fullaccess",
+        "date": "mm/dd/yyyy"
+    }
+}
+
+[
+    {
+        "_id": "5e4ah571ss5",
+        "text": "lorem ipsum",
+        "userData": {
+            "src": "http://lol",
+            "username": "fullaccess",
+            "date": "mm/dd/yyyy"
+        }
+    },
+    {
+        "_id": "5e4ah571ss5",
+        "text": "lorem ipsum",
+        "userData": {
+            "src": "http://lol",
+            "username": "fullaccess",
+            "date": "mm/dd/yyyy"
+        }
+    },
+    {
+        "_id": "5e4ah571ss5",
+        "text": "lorem ipsum",
+        "userData": {
+            "src": "http://lol",
+            "username": "fullaccess",
+            "date": "mm/dd/yyyy"
+        }
+    }
+]
+
+req POST to /messages
+
+{
+    "text": "lorem ipsum",
+    "username": "fullaccess"
+}
+
+res
+
+{
+    "success": false,
+    "err": 5
+}
+
+req PUT /messages
+
+{
+    "_id": "5e4ah571ss5",
+    "text": "lorem ipsum"
+}
+
+res
+
+{
+    "success": false,
+    "err": 5
+}
+
+req DELETE to /messages
+
+{
+    "_id": "5e4ah571ss5"
+}
+
+res 
+
+{
+    "success": false,
+    "err": 5
+}
