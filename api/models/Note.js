@@ -9,13 +9,6 @@ const NoteSchema = new mongoose.Schema({
 
 });
 
-const UserSchema = new mongoose.Schema({
-  avatar: {type: Img, required: true},
-  username:{type: String, unique: true, required: true},
-  logindate: Date
-});
-
-const User = moongoose.model('User'),UserSchema;
 const Note = mongoose.model('Note', NoteSchema);
 
 module.exports = Note;
