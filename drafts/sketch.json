@@ -5,7 +5,12 @@
             "GET": "requests information about a given user",
             "POST": "registers a giver user"
         },
-        "/messages": "get/post/put/delete",
+        "/messages": {
+            "GET": "request full history of messages",
+            "POST": "posts a message",
+            "PUT": "updates an existing message",
+            "DELETE": "deletes an existing message"
+        },
         "/login": {
             "POST": "request a login"
         },
@@ -29,7 +34,10 @@
                         "success": false,
                         "err": 0
                     }
-                }
+                },
+                "errors": [
+                    "User does not exist"
+                ]
             },
             "POST": {
                 "req": {
@@ -43,9 +51,15 @@
                     },
                     "failure": {
                         "success": false,
-                        "err": 5
+                        "err": 2
                     }
-                }
+                },
+                "errors": [
+                    "User is already registered",
+                    "Username must be longer than 3 characters",
+                    "Password must be longer than 4 characters",
+                    "Passwords do not match"
+                ]
             }
 
         }
@@ -85,9 +99,7 @@
                             },
                             {}
                         ],
-                        "failure": {
-                            "err": 0
-                        }
+                        "failure": null
                     },
                     {
                         "success": {
@@ -137,13 +149,15 @@
                             "err": 0
                         }
                     }
+                ],
+                "errors": [
+                    "Id does not match any existing message",
+                    "Username does not match any existing user"
                 ]
-                
             },
             "POST": {
                 "req": {
-                    "text": "lorem ipsum",
-                    "username": "fullaccess"
+                    "text": "lorem ipsum"
                 },
                 "res": {
                     "success": {
@@ -154,7 +168,11 @@
                         "success": false,
                         "err": 0
                     }
-                }
+                },
+                "errors": [
+                    "Unauthorized",
+                    "Cannot post an empty message"
+                ]
             },
             "PUT": {
                 "req": {
@@ -170,7 +188,12 @@
                         "success": false,
                         "err": 0
                     }
-                }
+                },
+                "errors": [
+                    "Unauthorized",
+                    "Id does not match any existing message",
+                    "Cannot post an empty message"
+                ]
             },
             "DELETE": {
                 "req": {
@@ -185,7 +208,11 @@
                         "success": false,
                         "err": 0
                     }
-                }
+                },
+                "errors": [
+                    "Unauthorized",
+                    "Id does not match any existing message"
+                ]
             }
         }
     },
@@ -206,7 +233,11 @@
                         "success": false,
                         "err": 0
                     }
-                }
+                },
+                "errors": [
+                    "User is not registered",
+                    "Username and password do not match"
+                ]
             }
         }
     },
@@ -224,8 +255,25 @@
                         "success": false,
                         "err": 0
                     }
-                }
+                },
+                "errors": [
+                    "You are not logged in"
+                ]
             }
+        }
+    },
+    {
+        "errors": {
+            "00": "Id does not match any existing message",
+            "01": "Cannot post an empty message",
+            "10": "User is already registered",
+            "11": "User does not exist",
+            "12": "Username and password do not match",
+            "20": "Username must be longer than 3 characters",
+            "21": "Password must be longer than 4 characters",
+            "22": "Passwords do not match",
+            "23": "Unauthorized",
+            "24": "You are not logged in"
         }
     }
 ]
