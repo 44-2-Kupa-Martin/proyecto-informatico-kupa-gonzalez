@@ -5,11 +5,11 @@ function SearchBar(props) {
     const [value, setValue]= useState('');
     const context= useContext(Context);
     function searchHandler() {
-        let query= value.algo;
-        axios.get('', query).then((res) => {
-            context.setMessages(res)
-        })
-        return
+        // let query= value.algo;
+        // axios.get('', query).then((res) => {
+        //     context.setMessages(res)
+        // })
+        // return
     }
     function handleChange(event) {
         setValue(`${event.target.value}`);

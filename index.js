@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
-  const MongoStore = require('connect-mongo')(session);
+const MongoStore = require('connect-mongo');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const { request } = require('express');
@@ -9,16 +9,13 @@ const User = require('./api/models/User');
 
 
 
-const port = process.env.PORT        || 3000;
+const port = process.env.PORT        || 3100;
 const db   = process.env.MONGODB_URI || 'mongodb+srv://hellodb:hellodb@cluster0.6btkp.mongodb.net/cluster0?retryWrites=true&w=majority';
 
 const app = express();
 
-
-mongoose.set('useUnifiedTopology', true);
-mongoose.set('useFindAndModify', false);
 mongoose
-  .connect(db, { useNewUrlParser: true })
+  .connect(db, { useNewUrlParser: true,  useUnifiedTopology: true})
   .then(() => {
     console.log(`DB connected @ ${db}`);
   })
@@ -33,32 +30,22 @@ app.listen(port, () => {
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-const connection = mongoose.createConnection(db);
-
-const sessionStore = new MongoStore({ mongooseConnection: connection, collection: 'sessions' })
-
-app.use(session({
-    secret: process.env.SECRET,
-    resave: false,
-    saveUninitialized: true,
-    store: sessionStore 
-}));
-
 passport.use(new LocalStrategy(
   function(username, password, cb) {
-      User.findOne({ username: username })
-          .then((user) => {
-              if (!user) { return cb(null, false, {err:0}) }
-              
-              if (user.password === password) {
-                  return cb(null, user);
-              } else {
-                  return cb(null, false, {err: 1});
-              }
-          })
-          .catch((err) => {   
-              cb(err);
-          });
+    console.log('until here');
+    User.findOne({ username: username })
+        .then((user) => {
+            if (!user) { return cb(null, false, {err:0}) }
+            
+            if (user.password === password) {
+                return cb(null, user);
+            } else {
+                return cb(null, false, {err: 1});
+            }
+        })
+        .catch((err) => {   
+            cb(err);
+        });
 }));
 passport.serializeUser(function(user, cb) {
   cb(null, user.id);
@@ -69,15 +56,25 @@ passport.deserializeUser(function(id, cb) {
       cb(null, user);
   });
 });
+
+app.use(session({
+  secret: 'tu vija',
+  resave: false,
+  saveUninitialized: true,
+  store: new MongoStore({
+    mongoUrl: db
+  })
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.post('/register', (req, res, next) => {
-  if (req.username && req.password){
-    const userinstance= new User({username: req.username, password: req.password})
+  if (req.body.username && req.body.password){
+    const userinstance= new User({username: req.body.username, password: req.body.password})
     userinstance.save()
   }
-  
+  next();
 
 });
 
@@ -91,9 +88,25 @@ app.get('/login', (req, res, next) => {
 });
 
 app.post('/login', (req, res, next) => {
-  objeto= passport.authenticate('local');
-  console.log(objeto);
-  res.send(objeto);
+  passport.authenticate("local", (err, user, info) => {
+    if (err) { return next(err); }
+    if (!user) { return res.send(info); }
+    req.logIn(user, (err) => {
+      if (err) { return next(err); }
+    });
+    return res.send('Nice cock');
+  })(req, res, next);
 });
 
-app.listen(3000);
+app.get('/protected', (req, res, next) => {
+  if (req.isAuthenticated()) {
+    res.send('Nice cock');
+  } else {
+    res.send('ÑAo ÑAO AMIGO');
+  }
+})
+
+app.get('/logout', (req, res, next) => {
+  req.logout();
+  res.send('bruhj');
+})

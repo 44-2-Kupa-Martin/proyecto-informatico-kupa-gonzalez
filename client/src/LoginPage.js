@@ -32,18 +32,18 @@ function LoginPage(props) {
     }
     //Component functions
     function login() {
-        axios.post('', {username, password})
-            .then((res, err) => {
-                if (err) throw err;
-                if (res.success) {
-                    context.setPage([
-                        <Nav />,
-                        <PublishedMsg />,
-                        <PostMsg />
-                    ]);
-                    context.setLoginState(true);
-                }
-            });
+        // axios.post('', {username, password})
+        //     .then((res, err) => {
+        //         if (err) throw err;
+        //         if (res.success) {
+        //             context.setPage([
+        //                 <Nav />,
+        //                 <PublishedMsg />,
+        //                 <PostMsg />
+        //             ]);
+        //             context.setLoginState(true);
+        //         }
+        //     });
     }
     return (
         <div>

@@ -31,14 +31,14 @@ function SigninPage(props) {
     }
     //local functions
     function signin() {
-        axios.put('', {localUsername, localPassword})
-            .then((req, res) => {
-                if (res.success) {
-                    login()
-                } else {
-                    //failed signin
-                }
-            })
+        // axios.put('', {localUsername, localPassword})
+        //     .then((req, res) => {
+        //         if (res.success) {
+        //             login()
+        //         } else {
+        //             //failed signin
+        //         }
+        //     })
     }
     return (
         <div>
