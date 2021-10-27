@@ -6,14 +6,6 @@ function MessageData(props) {
         props.username= 'Anonymous';
     }
     
-    if (props.posting) {
-        return (
-            <div>
-                <img src={props.src} />
-                <h4>{props.username}</h4>
-            </div>
-        )
-    }
     return (
         <div>
             <img src={props.src} />

@@ -1,22 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
-import Nav from './Nav';
-import PublishedMsg from './PublishedMsg';
+import Nav from './components/Nav';
 import React, {useState} from 'react';
-import PostMsg from './PostMsg';
+import GlobalStyles from "./components/styles/Global";
+import Messages from './components/Messages';
 
 export const Context= React.createContext();
 function App() {
-  const [page, setPage]= useState([
+  const pageContents= [
     <Nav />,
-    <PublishedMsg />,
-    <PostMsg />
-  ]);
+    <Messages />
+  ];
+  const [page, setPage]= useState(pageContents);
   const [messages, setMessages]= useState();
   const [loginState, setLoginState]= useState(false);
   return (
     <div>
-      <Context.Provider value={{setPage, messages, setMessages, loginState, setLoginState}}>
+      <Context.Provider value={{setPage, messages, setMessages, loginState, setLoginState, pageContents}}>
+        <GlobalStyles />
         {page}
       </Context.Provider>
     </div>
