@@ -26,9 +26,9 @@
                     "username": "lorem ipsum"
                 },
                 "res": {
-                    "success": {
+                    "success":  {
                         "username": "lorem ipsum",
-                        "createdAt": "mm/dd/yyyy"
+                        "createdAt":"mm/dd/yyyy"
                     },
                     "failure": {
                         "success": false,

@@ -6,6 +6,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const { request } = require('express');
 const User = require('./api/models/User');
+const multer = require('multer');
 
 
 
@@ -26,6 +27,60 @@ app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
 ;
+
+const storage = multer.diskstorage({
+  destination: 'api/images/',
+  filename: function(req, file, cb){
+    cb(null,file.fieldname + '-' + Date.now() + Path.extname(file.originalname));
+  }
+})
+
+const upload = multer ({
+  storage: storage,
+  limits: {fileSize: 1000000},
+  fileFilter: function (req, file, cb){
+    checkFileType(file, cb);
+  }
+}).single('Myimage');
+
+
+//funcion para decir que extensiones estan permitidas
+function checkFileType(file, cb){
+  const filetypes = /jpeg|jpg|png|gif|/;
+  //chequeando la extension del archivo
+  const extname = filetypes.test(Path.extname(file.originalname).toLowerCase());
+  //chequeando el mime
+  const mimetype = filetypes.test(file.mimetype);
+}
+
+if(mimetype && extname){
+  return cb(null,true);
+}   else{
+    cb('Error: solo imagenes'); 
+}
+
+app.post('/upload',(req, res) => {
+  upload(req, res, (err) => {
+    if(err  ) {
+      res.render('index', {
+        msg: err
+      }); 
+    } else{
+      if(req.file == undefined){
+        res.render('index',   {
+          msg: 'Error: ningun archivo seleccionado'
+        });
+      } else {
+        res.render('index', {
+          msg: 'Archivo subido',
+          file: `images/${req.file.filename}`
+        })
+      }
+    }
+  })
+
+})
+
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
