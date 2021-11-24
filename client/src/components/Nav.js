@@ -26,12 +26,12 @@ function Nav(props) {
                 </li>
                 <SearchBar />
                 {
-                    context.loginState ? //context.loginState
+                    false ? //context.loginState
                     <UserMenu /> : 
                     <li className="nav"><button className="nav login" onClick={() => login()}>Log In</button></li>
                 }
             </ul>
-            <div style={{height: '55px', display: 'block'}} /> {/*Filling up the space corresponding to the navbar*/}
+            <div style={{height: '8vh', display: 'block'}} /> {/*Filling up the space corresponding to the navbar*/}
         </Wrapper>
     )
 }

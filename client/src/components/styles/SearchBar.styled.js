@@ -2,11 +2,14 @@ import styled from "styled-components";
 
 export const Wrapper= styled.li`
     form.searchBar {
-        display: inline-block;
+        display: inline-flex;
+        height: 100%;
+        align-items: center;
     }
     input.searchBar {
         background-color: #4682B4;
-        height: 40px;
+        height: 80%;
+        max-height: 40px;
         width: 30vw;
         border: 1px solid #4da6ff;
         outline: none;
@@ -24,7 +27,8 @@ export const Wrapper= styled.li`
         border: 1px solid #4d4dff;
     }
     button.searchBar {
-        height: 40px;
+        height: 80%;
+        max-height: 40px;
         width: 5vw;
         padding: 0;
         border: 1px solid #4da6ff;

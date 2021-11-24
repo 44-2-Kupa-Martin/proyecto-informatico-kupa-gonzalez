@@ -32,13 +32,23 @@ function PostMsg(props) {
         setErrorCode(null);
         setValue(`${event.target.value}`);
     }
+    function resizeTextarea(event) {
+        event.target.style.height = 'inherit';
+        event.target.style.height = `${event.target.scrollHeight}px`; 
+    }
     return (
         <Wrapper> {/* div */}
-            <form className="postMsg" onSubmit={(e)=> e.preventDefault()}>
-                <input className="postMsg" type="text" placeholder="Enter your message" value={value} onChange={(event) => handleChange(event)} />
-                <button className="postMsg" onClick={() => messageHandler()}>Send</button>
+            <form className="postMsg" name="postMessage" onSubmit={(e)=> e.preventDefault()}>
+                <textarea className="postMsg" name="message" maxLength="500" placeholder="Enter your message" required value={value} onChange={(event) => {handleChange(event);resizeTextarea(event)}} />
             </form>
-            {errorCode ? errors[errorCode] : null}
+            <div className="postMsg flexContainer">
+                {
+                    value !== '' && errorCode === null ? 
+                    <button className="postMsg" form="postMessage" onClick={() => messageHandler()}>Send</button> :
+                    <button className="postMsg cantSubmit">Send</button>
+                }
+                {errorCode ? errors[errorCode] : null}
+            </div>
         </Wrapper>
     )
 }

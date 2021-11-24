@@ -9,7 +9,7 @@ export const Wrapper= styled.nav`
         flex-flow: row;
         justify-content: space-between;
         background-color: #1E90FF;
-        height: 55px;
+        height: 8vh;
         position: fixed;
         top: 0;
         left: 0;

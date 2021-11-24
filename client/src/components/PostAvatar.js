@@ -48,10 +48,12 @@ function PostAvatar(props) {
         }
     }
     function submitHandler() {
+        console.log(selectedFile);
         if (selectedFile) {
             const formData = new FormData();
             formData.append("name", 'myImage');
-            formData.append("file", selectedFile);
+            formData.append("myFile", selectedFile, 'myImage');
+            console.log(...formData);
             axios.post('/image', formData);
         }
     }

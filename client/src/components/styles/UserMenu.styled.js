@@ -27,13 +27,13 @@ export const Wrapper= styled.li`
     li.userMenu {
         display: flex;
         justify-content: center;
-        height: 55px;
+        height: 8vh;
         width: 100%;
     }
     ul.userMenu:hover div.userMenu.dropdown {
         display: inline-flex;
         flex-flow: column nowrap;
-        height: 110px;
+        height: 16vh;
     }
     ul.userMenu:hover {
         background-color: #0080ff;

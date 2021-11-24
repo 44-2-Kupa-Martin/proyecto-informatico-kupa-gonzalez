@@ -5,7 +5,7 @@ import { Wrapper } from "./styles/Messages.styled";
 
 function Messages(props) {
     return (
-        <Wrapper> {/* div */}
+        <Wrapper style={{width: '100%'}}> {/* div */}
             <div className="messages container">
                 <PostMsg />
                 <PublishedMsg />
